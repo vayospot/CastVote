@@ -19,14 +19,14 @@ export default function SignIn() {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <View className="flex-1 bg-default px-6 py-20">
-      <Text className="mb-14 font-boldFont text-5xl text-default">Log In</Text>
+    <View className="flex-1 bg-default px-6 py-16">
+      <Text className="mb-14 font-boldFont text-4xl text-default">Log In</Text>
       <Controller
         control={control}
         rules={{ required: true }}
         render={({ field: { onChange, onBlur, value } }) => (
           <FormInput
-            inputClassName="text-red-300 text-5xl font-boldFont"
+            inputClassName=""
             IconLeft={() => (
               <Ionicons name="mail-outline" size={24} color={Colors.text} />
             )}

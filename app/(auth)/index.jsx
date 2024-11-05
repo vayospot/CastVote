@@ -15,9 +15,9 @@ export default function OnboardScreen() {
       <Swiper
         ref={swiperRef}
         enablePagination={true}
-        dotWidth={25}
+        dotWidth={20}
         dotHeight={3}
-        paginationPosition={5}
+        paginationPosition={6}
         dotColor={Colors.primary}
         onIndexChange={(index) => setActiveSlide(index)}
       >
@@ -35,9 +35,8 @@ export default function OnboardScreen() {
 
       <CustomButton
         title={activeSlide === 1 ? "Get Started" : "Next"}
-        className="mb-16 self-center bg-primary"
-        style={{ width: "90%" }}
-        textclassName="text-2xl font-boldFont"
+        className="mb-16 w-11/12 self-center bg-primary"
+        textclassName="text-xl font-boldFont"
         onPress={() => {
           if (activeSlide === 1) {
             router.push("/(auth)/SignIn");
@@ -53,16 +52,16 @@ export default function OnboardScreen() {
 const OnboardingStep = ({ title, description, imageSource }) => {
   return (
     <View className="h-full w-screen items-center px-6 py-20">
-      <View className="gap-3 self-start">
-        <Text className="font-boldFont text-5xl text-default">{title}</Text>
-        <Text className="font-regularFont text-xl text-default">
+      <View className="self-start" style={{ gap: 10 }}>
+        <Text className="font-boldFont text-4xl text-default">{title}</Text>
+        <Text className="font-regularFont text-lg text-default">
           {description}
         </Text>
       </View>
       <Image
         source={imageSource}
         className="mt-20"
-        style={{ width: 200, height: 200 }}
+        style={{ width: 180, height: 180 }}
         resizeMode="contain"
       />
     </View>

@@ -31,19 +31,20 @@ export default function FormInput({
   };
 
   return (
-    <View className={`gap-1.5 ${containerClassName}`}>
+    <View className={containerClassName} style={{ gap: 6 }}>
       {label && (
-        <Text className={`font-regularFont text-neutral-300 ${labelClassName}`}>
+        <Text className={`font-regularFont text-default/75 ${labelClassName}`}>
           {label}
         </Text>
       )}
 
       <View
-        className={`flex-row items-center gap-3 border border-x-0 border-t-0 border-white ${inputBoxClassName}`}
+        className={`flex-row items-center border border-x-0 border-t-0 border-default ${inputBoxClassName}`}
+        style={{ gap: 10 }}
       >
         {IconLeft && <IconLeft />}
         <TextInput
-          className={`flex-1 py-1 font-regularFont text-lg text-white ${inputClassName}`}
+          className={`flex-1 py-1 font-regularFont text-lg text-default ${inputClassName}`}
           value={value}
           onChangeText={onChangeText}
           onSubmitEditing={onSubmitEditing}

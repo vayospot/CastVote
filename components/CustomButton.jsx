@@ -35,7 +35,7 @@ export default function Button({
 }) {
   return (
     <TouchableOpacity
-      className={`w-full flex-row items-center justify-center rounded-2xl bg-black p-4 shadow-md shadow-neutral-400/70 ${className}`}
+      className={`w-full flex-row items-center justify-center rounded-2xl bg-black p-3 shadow-md shadow-neutral-400/70 ${className}`}
       disabled={disabled || loading}
       onPress={disabled || loading ? null : onPress}
       activeOpacity={0.8}
@@ -48,7 +48,7 @@ export default function Button({
             color={loadingColor || "gray"}
           />
           {loadingText && (
-            <Text className={`ml-2 ${textColor}`}>{loadingText}</Text>
+            <Text className={`ml-2 ${textclassName}`}>{loadingText}</Text>
           )}
         </>
       ) : (

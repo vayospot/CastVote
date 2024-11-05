@@ -35,7 +35,8 @@ export default function OnboardScreen() {
 
       <CustomButton
         title={activeSlide === 1 ? "Get Started" : "Next"}
-        className="mb-16 w-[90%] self-center bg-primary"
+        className="mb-16 self-center bg-primary"
+        style={{ width: "90%" }}
         textclassName="text-2xl font-boldFont"
         onPress={() => {
           if (activeSlide === 1) {

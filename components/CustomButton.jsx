@@ -35,7 +35,7 @@ export default function Button({
 }) {
   return (
     <TouchableOpacity
-      className={`w-full flex-row items-center justify-center rounded-2xl bg-black p-4 shadow-md shadow-neutral-500/80 ${className}`}
+      className={`w-full flex-row items-center justify-center rounded-2xl bg-black p-4 shadow-md shadow-neutral-400/70 ${className}`}
       disabled={disabled || loading}
       onPress={disabled || loading ? null : onPress}
       activeOpacity={0.8}

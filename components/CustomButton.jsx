@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text, ActivityIndicator } from "react-native";
+import { TouchableOpacity, View, Text, ActivityIndicator } from "react-native";
 
 /**
  * Button component with customizable styles and optional icons.
@@ -19,7 +19,7 @@ import { TouchableOpacity, Text, ActivityIndicator } from "react-native";
  *
  * @returns {JSX.Element} A styled button with optional icons and title.
  */
-export default function Button({
+export default function CustomButton({
   title,
   IconLeft,
   IconRight,
@@ -35,22 +35,27 @@ export default function Button({
 }) {
   return (
     <TouchableOpacity
-      className={`w-full flex-row items-center justify-center rounded-2xl bg-black p-3 shadow-md shadow-neutral-400/70 ${className}`}
+      className={`w-full flex-row items-center justify-center rounded-2xl bg-black p-3 shadow-md shadow-neutral-400/70 ${className} ${(disabled || loading) && "opacity-80"}`}
       disabled={disabled || loading}
       onPress={disabled || loading ? null : onPress}
       activeOpacity={0.8}
       {...props}
     >
       {loading ? (
-        <>
+        <View
+          className={`flex-row items-center justify-center`}
+          style={{ gap: 6 }}
+        >
           <ActivityIndicator
             size={loadingSize}
             color={loadingColor || "gray"}
           />
           {loadingText && (
-            <Text className={`ml-2 ${textclassName}`}>{loadingText}</Text>
+            <Text className={`text-lg text-white ${textclassName}`}>
+              {loadingText}
+            </Text>
           )}
-        </>
+        </View>
       ) : (
         <>
           {IconLeft && <IconLeft />}

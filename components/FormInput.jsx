@@ -4,30 +4,38 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Pressable,
   Keyboard,
 } from "react-native";
+import { Controller } from "react-hook-form";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function FormInput({
+  control,
+  name,
   label,
-  value,
-  onChangeText,
+  rules,
   secureTextEntry = false,
   secureIconSize = 24,
-  secureIconColor = "#d4d4d4",
+  secureIconColor = "#9E9E9E",
   labelClassName,
   inputClassName,
   inputBoxClassName,
   containerClassName,
   IconLeft,
-  handleSubmit,
+  validationError,
+  onSubmit,
+  type,
+  checkboxTitle,
+  checkboxColor,
+  checkboxIconColor,
   ...props
 }) {
-  const [hideSecureText, setHideSecureText] = useState(true);
+  const [isSecureHidden, setIsSecureHidden] = useState(true);
 
-  const onSubmitEditing = () => {
+  const handleFormSubmit = () => {
     Keyboard.dismiss();
-    handleSubmit();
+    if (onSubmit) onSubmit();
   };
 
   return (
@@ -38,41 +46,92 @@ export default function FormInput({
         </Text>
       )}
 
-      <View
-        className={`flex-row items-center border border-x-0 border-t-0 border-default ${inputBoxClassName}`}
-        style={{ gap: 10 }}
-      >
-        {IconLeft && <IconLeft />}
-        <TextInput
-          className={`flex-1 py-1 font-regularFont text-lg text-default ${inputClassName}`}
-          value={value}
-          onChangeText={onChangeText}
-          onSubmitEditing={onSubmitEditing}
-          secureTextEntry={secureTextEntry && hideSecureText}
-          {...props}
-        />
-        {secureTextEntry && (
-          <TouchableOpacity
-            className="items-center justify-center"
-            activeOpacity={0.7}
-            onPress={() => setHideSecureText(!hideSecureText)}
-          >
-            {hideSecureText ? (
-              <Ionicons
-                name="eye-off-outline"
-                size={secureIconSize}
-                color={secureIconColor}
+      <Controller
+        control={control}
+        name={name}
+        rules={rules}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <>
+            {type === "checkbox" ? (
+              <Checkbox
+                title={checkboxTitle}
+                checkboxColor={checkboxColor}
+                iconColor={checkboxIconColor}
+                checked={value}
+                onToggle={onChange}
               />
             ) : (
-              <Ionicons
-                name="eye-outline"
-                size={secureIconSize}
-                color={secureIconColor}
-              />
+              <View
+                className={`flex-row items-center border-b border-default ${inputBoxClassName}`}
+                style={{ gap: 15 }}
+              >
+                {IconLeft && <IconLeft />}
+
+                <TextInput
+                  className={`flex-1 py-1 font-regularFont text-lg text-default ${inputClassName}`}
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  onSubmitEditing={handleFormSubmit}
+                  secureTextEntry={secureTextEntry && isSecureHidden}
+                  {...props}
+                />
+
+                {secureTextEntry && (
+                  <TouchableOpacity
+                    className="items-center justify-center"
+                    activeOpacity={0.7}
+                    onPress={() => setIsSecureHidden(!isSecureHidden)}
+                  >
+                    <Ionicons
+                      name={isSecureHidden ? "eye-off-outline" : "eye-outline"}
+                      size={secureIconSize}
+                      color={secureIconColor}
+                    />
+                  </TouchableOpacity>
+                )}
+              </View>
             )}
-          </TouchableOpacity>
+          </>
+        )}
+      />
+
+      <Text
+        className={`text-sm text-red-600 opacity-0 ${validationError && "opacity-100"}`}
+      >
+        {validationError?.message}
+      </Text>
+    </View>
+  );
+}
+
+function Checkbox({
+  checked = false,
+  title,
+  onToggle,
+  checkboxColor,
+  iconColor,
+}) {
+  return (
+    <Pressable
+      role="checkbox"
+      aria-checked={checked}
+      className="flex-row items-center"
+      style={{ gap: 8 }}
+      onPress={() => onToggle(!checked)}
+    >
+      <View
+        className={`h-5 w-5 items-center justify-center rounded-full border`}
+        style={{
+          backgroundColor: checked ? checkboxColor : "transparent",
+          borderColor: checkboxColor,
+        }}
+      >
+        {checked && (
+          <Ionicons name="checkmark" size={16} color={iconColor || "white"} />
         )}
       </View>
-    </View>
+      <Text className="font-boldFont text-default">{title}</Text>
+    </Pressable>
   );
 }

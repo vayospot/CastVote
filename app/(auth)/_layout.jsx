@@ -1,18 +1,19 @@
-import Colors from "@/constants/Colors";
 import { Stack } from "expo-router";
+import BackButton from "@/components/BackButton";
+import Colors from "@/constants/Colors";
 
 export default function AuthLayout() {
   return (
     <Stack
       screenOptions={{
-        headerStyle: {
-          backgroundColor: Colors.background,
-        },
+        headerLeft: () => <BackButton />,
+        headerStyle: { backgroundColor: Colors.background },
+        headerShadowVisible: false,
       }}
     >
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="SignIn" options={{ title: "" }} />
-      <Stack.Screen name="SignUp" options={{ headerShown: false }} />
+      <Stack.Screen name="SignUp" />
     </Stack>
   );
 }

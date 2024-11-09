@@ -1,16 +1,18 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useForm } from "react-hook-form";
 import Colors from "@/constants/Colors";
 import FormInput from "@/components/FormInput";
 import CustomButton from "@/components/CustomButton";
+import { useState } from "react";
 
 export default function SignIn() {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     control,
     handleSubmit,
-    formState: { errors, dirtyFields },
+    formState: { errors, dirtyFields, isValid },
   } = useForm({
     defaultValues: {
       email: "",
@@ -20,7 +22,18 @@ export default function SignIn() {
   });
 
   const handleFormSubmit = () => {
-    handleSubmit(onSubmit)();
+    if (!isValid) return;
+    try {
+      setIsLoading(true);
+      handleSubmit(onSubmit)();
+      setTimeout(() => {
+        router.replace("/(tabs)");
+        setIsLoading(false);
+      }, 1000);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
   };
 
   const onSubmit = (data) => console.log(data);
@@ -74,13 +87,14 @@ export default function SignIn() {
         <CustomButton
           title="Log In"
           className="mt-8 bg-primary"
-          textclassName="text-background"
           disabled={!dirtyFields.email || !dirtyFields.password}
           onPress={handleFormSubmit}
+          loading={isLoading}
+          loadingColor={Colors.background}
         />
       </View>
 
-      <Link href="/(auth)/SignUp" asChild>
+      <Link href="/(auth)/(signup)" asChild>
         <TouchableOpacity className="mt-3 self-center">
           <Text className="font-regularFont text-default/80">
             Don't have an account?{" "}

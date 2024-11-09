@@ -35,15 +35,23 @@ export default function CustomButton({
 }) {
   return (
     <TouchableOpacity
-      className={`w-full flex-row items-center justify-center rounded-2xl bg-black p-3 shadow-md shadow-neutral-400/70 ${className} ${(disabled || loading) && "opacity-80"}`}
+      className={`relative w-11/12 flex-row items-center justify-center self-center rounded-2xl bg-black p-3 shadow-md shadow-neutral-400/70 ${className} ${(disabled || loading) && "opacity-80"}`}
       disabled={disabled || loading}
       onPress={disabled || loading ? null : onPress}
       activeOpacity={0.8}
       {...props}
     >
-      {loading ? (
+      <View className={`opacity-100 ${loading && "opacity-0"}`}>
+        {IconLeft && <IconLeft />}
+        <Text className={`font-boldFont text-xl text-white ${textclassName}`}>
+          {title}
+        </Text>
+        {IconRight && <IconRight />}
+      </View>
+
+      {loading && (
         <View
-          className={`flex-row items-center justify-center`}
+          className={`absolute flex-row items-center justify-center`}
           style={{ gap: 6 }}
         >
           <ActivityIndicator
@@ -51,17 +59,13 @@ export default function CustomButton({
             color={loadingColor || "gray"}
           />
           {loadingText && (
-            <Text className={`text-lg text-white ${textclassName}`}>
+            <Text
+              className={`font-boldFont text-xl text-white ${textclassName}`}
+            >
               {loadingText}
             </Text>
           )}
         </View>
-      ) : (
-        <>
-          {IconLeft && <IconLeft />}
-          <Text className={`text-lg text-white ${textclassName}`}>{title}</Text>
-          {IconRight && <IconRight />}
-        </>
       )}
     </TouchableOpacity>
   );

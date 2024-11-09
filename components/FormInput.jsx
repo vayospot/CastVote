@@ -29,6 +29,7 @@ export default function FormInput({
   checkboxTitle,
   checkboxColor,
   checkboxIconColor,
+  disabled = false,
   ...props
 }) {
   const [isSecureHidden, setIsSecureHidden] = useState(true);
@@ -62,7 +63,7 @@ export default function FormInput({
               />
             ) : (
               <View
-                className={`flex-row items-center border-b border-default ${inputBoxClassName}`}
+                className={`flex-row items-center border-b border-default ${inputBoxClassName} ${disabled && "opacity-40"}`}
                 style={{ gap: 15 }}
               >
                 {IconLeft && <IconLeft />}
@@ -74,6 +75,7 @@ export default function FormInput({
                   onBlur={onBlur}
                   onSubmitEditing={handleFormSubmit}
                   secureTextEntry={secureTextEntry && isSecureHidden}
+                  editable={!disabled}
                   {...props}
                 />
 

@@ -35,8 +35,7 @@ export default function OnboardScreen() {
 
       <CustomButton
         title={activeSlide === 1 ? "Get Started" : "Next"}
-        className="mb-16 w-11/12 self-center bg-primary"
-        textclassName="text-xl font-boldFont"
+        className="mb-16 bg-primary"
         onPress={() => {
           if (activeSlide === 1) {
             router.push("/(auth)/SignIn");

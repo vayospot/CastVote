@@ -74,7 +74,7 @@ export default function FingerprintSetup() {
           text1: "Fingerprint setup successful.",
         });
         setTimeout(() => {
-          router.replace("/(tabs)");
+          router.replace("/(tabs)/Home");
           setIsRegistering(false);
         }, 1000);
       } else {
@@ -95,7 +95,7 @@ export default function FingerprintSetup() {
       "You won't be able to use fingerprint verification for voting.",
       [
         { text: "Cancel", style: "cancel" },
-        { text: "Proceed", onPress: () => router.replace("/(auth)/(tabs)") },
+        { text: "Proceed", onPress: () => router.replace("/(tabs)/Home") },
       ],
       { cancelable: true },
     );

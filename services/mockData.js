@@ -1,0 +1,50 @@
+export const VOTE_EVENTS = [
+  {
+    id: "aFWdHRn39TAxjJZ9Hgb3MjkF",
+    title: "Presidential Election",
+    subtitle: "Nationwide",
+    voteCount: "25.7k votes",
+    timeLeft: "8 hours left",
+    imageSource: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74",
+    // imageSource: "https://images.unsplash.com/photo-1618420138990-25842589a7c4",
+    voted: false,
+  },
+  {
+    id: "aFbcWWD3P5s5ESYyhqsQbdNd",
+    title: "Nigeria Election",
+    subtitle: "FCT",
+    voteCount: "783k votes",
+    timeLeft: "5 hours left",
+    imageSource: "https://images.unsplash.com/photo-1684853693031-ab9e3f8c9d5e",
+    voted: true,
+  },
+  {
+    id: "aFZ3Q1V3P2Gq7Rz6Fk9V5sYt",
+    title: "School Board Elections",
+    subtitle: "California",
+    voteCount: "1.2k votes",
+    timeLeft: "1 hour 30 minutes left",
+    imageSource:
+      "https://images.unsplash.com/photo-1709483372751-39cc94c9e358?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+
+    voted: false,
+  },
+  {
+    id: "aFZQ9Pj3wfPKwdCDdfh9KHri",
+    title: "MP Election",
+    subtitle: "Taj Mahal",
+    voteCount: "345k votes",
+    timeLeft: "2 days left",
+    imageSource: "https://images.unsplash.com/photo-1564507592333-c60657eea523",
+    voted: true,
+  },
+  {
+    id: "aFf8W2vKy1Ks7iN3Dmj3Q9z4",
+    title: "National Youth Election",
+    subtitle: "Sub-Saharan Africa",
+    voteCount: "1.9m votes",
+    timeLeft: "24 hours left",
+    imageSource: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99",
+    voted: false,
+  },
+];

@@ -27,7 +27,7 @@ export default function SignIn() {
       setIsLoading(true);
       handleSubmit(onSubmit)();
       setTimeout(() => {
-        router.replace("/(tabs)");
+        router.replace("/(tabs)/Home");
         setIsLoading(false);
       }, 1000);
     } catch (error) {

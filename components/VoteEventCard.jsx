@@ -8,7 +8,7 @@ import abbreviateNumber from "@/utils/abbreviateNumber";
 import formatTimestamp from "@/utils/formatTimestamp";
 
 export default VoteEventCard = ({
-  id,
+  id: eventId,
   title,
   subtitle,
   timeLeft,
@@ -17,7 +17,7 @@ export default VoteEventCard = ({
   voted = false,
 }) => {
   return (
-    <Link href={`/(routes)/vote-events/${id}`} asChild>
+    <Link href={`/(routes)/vote-events/${eventId}`} asChild>
       <TouchableOpacity activeOpacity={0.9} className="max-w-xs self-center">
         <ImageBackground
           source={imageSource}

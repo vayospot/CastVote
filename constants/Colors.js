@@ -4,5 +4,5 @@ export default Colors = {
   primary: "#0056b3",
   secondary: "#7fb3eb",
   accent: "#409efd",
-  neutral: "#737373",
+  subtle: "#737373",
 };

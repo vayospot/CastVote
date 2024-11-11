@@ -9,7 +9,7 @@ module.exports = {
         primary: "#0056b3",
         secondary: "#7fb3eb",
         accent: "#409efd",
-        neutral: "#737373",
+        subtle: "#737373",
       },
       backgroundColor: {
         default: "#f8f9fb",
@@ -17,7 +17,7 @@ module.exports = {
         primary: "#0056b3",
         secondary: "#7fb3eb",
         accent: "#409efd",
-        neutral: "#737373",
+        subtle: "#737373",
       },
       fontFamily: {
         regularFont: ["PTSansRegular"],

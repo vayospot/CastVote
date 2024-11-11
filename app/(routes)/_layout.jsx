@@ -1,19 +1,14 @@
-import { View } from "react-native";
 import { Stack } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
-import { Header } from "@react-navigation/elements";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ImageBackground } from "@/components/Image";
 import BackButton from "@/components/BackButton";
 import Colors from "@/constants/Colors";
 
 export default function RoutesLayout() {
-  const insets = useSafeAreaInsets();
-
   return (
     <Stack
       screenOptions={{
         title: "",
+        headerTitleAlign: "center",
+        headerTitleStyle: { fontFamily: "PTSansBold" },
         headerStyle: { backgroundColor: Colors.background },
         headerShadowVisible: false,
         headerLeft: () => <BackButton />,
@@ -24,8 +19,15 @@ export default function RoutesLayout() {
       }}
     >
       <Stack.Screen
-        name="vote-events/[id]"
+        name="vote-events/[eventId]"
         // Options is set dynamically by the route file
+      />
+      <Stack.Screen
+        name="vote-events/candidates/[candidateId]"
+        options={{
+          title: "Candidate",
+          contentStyle: { backgroundColor: Colors.background },
+        }}
       />
     </Stack>
   );

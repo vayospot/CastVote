@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Header } from "@react-navigation/elements";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { router, Stack, useLocalSearchParams } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { VOTE_EVENTS, CANDIDATES } from "@/services/mockData";
@@ -15,8 +15,8 @@ import Colors from "@/constants/Colors";
 
 export default function VoteEvent() {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
-  const { id } = useLocalSearchParams();
-  const event = VOTE_EVENTS.find((event) => event.id === id);
+  const { eventId } = useLocalSearchParams();
+  const event = VOTE_EVENTS.find((event) => event.id === eventId);
   const candidates = event.candidates.map((id) => CANDIDATES[id]);
 
   return (
@@ -28,7 +28,7 @@ export default function VoteEvent() {
             className="flex-row items-center justify-center"
             style={{ gap: 5 }}
           >
-            <Ionicons name="people-outline" size={20} color={Colors.neutral} />
+            <Ionicons name="people-outline" size={20} color={Colors.subtle} />
             <Text className="text-neutral-500 font-boldFont">Total Votes</Text>
           </View>
 
@@ -82,7 +82,9 @@ export default function VoteEvent() {
                 backgroundColor="transparent"
                 underlayColor="transparent"
                 iconStyle={{ marginRight: 5, marginLeft: 5 }}
-                onPress={() => {}}
+                onPress={() =>
+                  router.push(`(routes)/vote-events/candidates/${candidate.id}`)
+                }
                 activeOpacity={0.3}
               />
             </TouchableOpacity>

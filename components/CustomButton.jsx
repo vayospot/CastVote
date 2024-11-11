@@ -8,7 +8,7 @@ import { TouchableOpacity, View, Text, ActivityIndicator } from "react-native";
  * @param {React.Component} IconLeft - Component to render as the left icon (optional).
  * @param {React.Component} IconRight - Component to render as the right icon (optional).
  * @param {string} className - Additional className for styling with NativeWind.
- * @param {string} textclassName - Additional className for text styling.
+ * @param {string} textClassName - Additional className for text styling.
  * @param {boolean} disabled - Disable button when true.
  * @param {boolean} loading - Show loading spinner when true.
  * @param {string} loadingText - Optional text to show while loading.
@@ -24,7 +24,7 @@ export default function CustomButton({
   IconLeft,
   IconRight,
   className = "",
-  textclassName,
+  textClassName,
   disabled = false,
   loading = false,
   loadingText,
@@ -43,7 +43,7 @@ export default function CustomButton({
     >
       <View className={`opacity-100 ${loading && "opacity-0"}`}>
         {IconLeft && <IconLeft />}
-        <Text className={`font-boldFont text-xl text-white ${textclassName}`}>
+        <Text className={`font-boldFont text-xl text-white ${textClassName}`}>
           {title}
         </Text>
         {IconRight && <IconRight />}
@@ -60,7 +60,7 @@ export default function CustomButton({
           />
           {loadingText && (
             <Text
-              className={`font-boldFont text-xl text-white ${textclassName}`}
+              className={`font-boldFont text-xl text-white ${textClassName}`}
             >
               {loadingText}
             </Text>

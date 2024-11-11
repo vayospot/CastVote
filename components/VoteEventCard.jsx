@@ -4,6 +4,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { ImageBackground } from "@/components/Image";
 import Colors from "@/constants/Colors";
+import abbreviateNumber from "@/utils/abbreviateNumber";
+import formatTimestamp from "@/utils/formatTimestamp";
 
 export default VoteEventCard = ({
   id,
@@ -16,10 +18,10 @@ export default VoteEventCard = ({
 }) => {
   return (
     <Link href={`/(routes)/vote-events/${id}`} asChild>
-      <TouchableOpacity activeOpacity={0.9}>
+      <TouchableOpacity activeOpacity={0.9} className="max-w-xs self-center">
         <ImageBackground
           source={imageSource}
-          className="relative max-w-xs justify-between overflow-hidden rounded-xl"
+          className="relative justify-between overflow-hidden rounded-xl"
           transition={1000}
         >
           <LinearGradient
@@ -48,7 +50,7 @@ export default VoteEventCard = ({
                   color={Colors.background}
                 />
                 <Text className="font-regularFont text-sm text-background">
-                  {timeLeft}
+                  {formatTimestamp(timeLeft).timeLeft().hours} hours left
                 </Text>
               </View>
 
@@ -59,7 +61,7 @@ export default VoteEventCard = ({
                   color={Colors.background}
                 />
                 <Text className="font-regularFont text-sm text-background">
-                  {voteCount}
+                  {abbreviateNumber(voteCount)} votes
                 </Text>
               </View>
             </View>

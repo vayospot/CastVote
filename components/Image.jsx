@@ -10,9 +10,10 @@ export default function Image({
   source,
   className,
   placeholder = { blurhash: DEFAULT_BLURHASH },
-  transition = 500,
+  transition = 400,
   preload = false,
   accessibilityLabel = "image",
+  aspectVideo = true,
   ...props
 }) {
   if (preload && source) {
@@ -23,7 +24,7 @@ export default function Image({
     <ExpoImage
       source={source || { uri: "https://via.placeholder.com/300" }}
       placeholder={placeholder}
-      className={`aspect-video w-full ${className}`}
+      className={`w-full ${aspectVideo && "aspect-video"} ${className}`}
       transition={transition}
       accessibilityLabel={accessibilityLabel}
       {...props}
@@ -36,8 +37,9 @@ export function ImageBackground({
   source,
   className,
   placeholder = { blurhash: DEFAULT_BLURHASH },
-  transition = 500,
+  transition = 400,
   preload = false,
+  aspectVideo = true,
   ...props
 }) {
   if (preload && source) {
@@ -48,7 +50,7 @@ export function ImageBackground({
     <ExpoImageBackground
       source={source || { uri: "https://via.placeholder.com/300" }}
       placeholder={placeholder}
-      className={`aspect-video w-full ${className}`}
+      className={`w-full ${aspectVideo && "aspect-video"} ${className}`}
       transition={transition}
       {...props}
     >

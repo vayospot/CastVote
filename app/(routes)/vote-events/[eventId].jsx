@@ -12,12 +12,24 @@ import ProfileImage from "@/components/ProfileImage";
 import CustomButton from "@/components/CustomButton";
 import formatTimestamp from "@/utils/formatTimestamp";
 import Colors from "@/constants/Colors";
+import Toast from "react-native-toast-message";
 
 export default function VoteEvent() {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const { eventId } = useLocalSearchParams();
   const event = VOTE_EVENTS.find((event) => event.id === eventId);
   const candidates = event.candidates.map((id) => CANDIDATES[id]);
+
+  const handleVotePress = () => {
+    if (!selectedCandidate) {
+      Toast.show({
+        type: "error",
+        text1: "Please select a candidate",
+      });
+    } else {
+      router.push(`(routes)/vote-events/VerifyVoterID`);
+    }
+  };
 
   return (
     <>
@@ -92,7 +104,11 @@ export default function VoteEvent() {
         </View>
 
         <View className="mb-5 mt-auto" style={{ gap: 15 }}>
-          <CustomButton title="Vote" className="bg-primary" />
+          <CustomButton
+            title="Vote"
+            className="bg-primary"
+            onPress={handleVotePress}
+          />
           <CustomButton
             title="Stats"
             className="border border-primary bg-default"

@@ -13,7 +13,7 @@ export default function SignUpLayout() {
       }}
     >
       <Stack.Screen name="index" />
-      <Stack.Screen name="VoterIDInput" />
+      <Stack.Screen name="VoterIDSetup" />
       <Stack.Screen name="AccountSetup" />
       <Stack.Screen name="FingerprintSetup" />
     </Stack>

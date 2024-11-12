@@ -7,7 +7,7 @@ import FormInput from "@/components/FormInput";
 import CustomButton from "@/components/CustomButton";
 import Colors from "@/constants/Colors";
 
-export default function VoterIDInput() {
+export default function VoterIDInput({ onSubmit, href }) {
   const [isLoading, setIsLoading] = useState(false);
   const {
     control,
@@ -37,7 +37,7 @@ export default function VoterIDInput() {
       setIsLoading(true);
       handleSubmit(onSubmit)();
       setTimeout(() => {
-        router.push("/(auth)/(signup)/AccountSetup");
+        router.push(href);
         setIsLoading(false);
       }, 500);
     } catch (error) {
@@ -46,16 +46,8 @@ export default function VoterIDInput() {
     }
   };
 
-  const onSubmit = (data) => {
-    const cleanedData = {
-      ...data,
-      voterID: data.voterID.replaceAll("-", ""),
-    };
-    console.log(cleanedData);
-  };
-
   return (
-    <View className="flex-1 bg-default px-6 pt-5" style={{ gap: 50 }}>
+    <View className="flex-1" style={{ gap: 50 }}>
       <View className="items-center" style={{ gap: 30 }}>
         <Ionicons name="card-sharp" size={100} color={Colors.primary} />
 
@@ -64,8 +56,7 @@ export default function VoterIDInput() {
             Enter Voter ID
           </Text>
           <Text className="text-center font-regularFont text-lg text-default">
-            Provide your Voter ID to confirm your details and keep voting
-            secure.
+            Provide your Voter ID to verify your details and keep voting secure.
           </Text>
         </View>
       </View>
@@ -90,7 +81,7 @@ export default function VoterIDInput() {
         />
 
         <CustomButton
-          title="Next"
+          title="Verify"
           className="bg-primary"
           disabled={!dirtyFields.voterID}
           onPress={handleFormSubmit}

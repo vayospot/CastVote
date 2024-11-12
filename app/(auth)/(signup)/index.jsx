@@ -21,7 +21,7 @@ export default function RoleSelection() {
             elevation: 4,
             gap: 10,
           }}
-          onPress={() => router.push("/(auth)/(signup)/VoterIDInput")}
+          onPress={() => router.push("/(auth)/(signup)/VoterIDSetup")}
         >
           <Text className="self-end pr-8 pt-8 font-boldFont text-2xl text-default">
             Voter

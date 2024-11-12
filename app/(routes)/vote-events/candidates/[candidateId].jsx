@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { CANDIDATES } from "@/services/mockData";
 import ProfileImage from "@/components/ProfileImage";
 import CustomButton from "@/components/CustomButton";
@@ -26,7 +26,11 @@ export default function Candidate() {
           </View>
         </View>
 
-        <CustomButton title="Vote" className="bg-primary" onPress={() => {}} />
+        <CustomButton
+          title="Vote"
+          className="bg-primary"
+          onPress={() => router.push(`(routes)/vote-events/VerifyVoterID`)}
+        />
       </View>
 
       <ScrollView

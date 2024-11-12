@@ -29,6 +29,8 @@ export default function RoutesLayout() {
           contentStyle: { backgroundColor: Colors.background },
         }}
       />
+      <Stack.Screen name="vote-events/VerifyVoterID" />
+      <Stack.Screen name="vote-events/VerifyFingerprint" />
     </Stack>
   );
 }

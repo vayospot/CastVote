@@ -3,10 +3,19 @@ import { router, useLocalSearchParams } from "expo-router";
 import { CANDIDATES } from "@/services/mockData";
 import ProfileImage from "@/components/ProfileImage";
 import CustomButton from "@/components/CustomButton";
+import useVoteStore from "@/contexts/useVoteStore";
 
 export default function Candidate() {
   const { candidateId } = useLocalSearchParams();
+  const setSelectedCandidate = useVoteStore(
+    (state) => state.setSelectedCandidate,
+  );
   const candidate = CANDIDATES[candidateId];
+
+  const handleVotePress = () => {
+    setSelectedCandidate(candidateId);
+    router.replace(`(screens)/vote-events/VerifyVoterID`);
+  };
 
   return (
     <View className="flex-1 pt-5" style={{ gap: 30 }}>
@@ -20,7 +29,7 @@ export default function Candidate() {
             <Text className="font-boldFont text-2xl text-default">
               {candidate.name}
             </Text>
-            <Text className="text-subtle text-center font-regularFont">
+            <Text className="text-center font-regularFont text-subtle">
               {candidate.party}
             </Text>
           </View>
@@ -29,7 +38,7 @@ export default function Candidate() {
         <CustomButton
           title="Vote"
           className="bg-primary"
-          onPress={() => router.push(`(screens)/vote-events/VerifyVoterID`)}
+          onPress={handleVotePress}
         />
       </View>
 

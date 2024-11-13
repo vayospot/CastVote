@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { View, Text } from "react-native";
-import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useForm } from "react-hook-form";
 import FormInput from "@/components/FormInput";
 import CustomButton from "@/components/CustomButton";
 import Colors from "@/constants/Colors";
 
-export default function VoterIDInput({ onSubmit, href }) {
+export default function VoterIDInput({ onSubmit, onNavigate }) {
   const [isLoading, setIsLoading] = useState(false);
   const {
     control,
@@ -37,7 +36,7 @@ export default function VoterIDInput({ onSubmit, href }) {
       setIsLoading(true);
       handleSubmit(onSubmit)();
       setTimeout(() => {
-        router.push(href);
+        onNavigate();
         setIsLoading(false);
       }, 500);
     } catch (error) {

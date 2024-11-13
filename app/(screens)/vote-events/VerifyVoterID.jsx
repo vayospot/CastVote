@@ -1,5 +1,6 @@
 import { View } from "react-native";
 import VoterIDInput from "@/components/VoterIDInput";
+import { router } from "expo-router";
 
 export default function VerifyVoterID() {
   const onSubmit = (data) => {
@@ -14,7 +15,9 @@ export default function VerifyVoterID() {
     <View className="flex-1 pt-5">
       <VoterIDInput
         onSubmit={onSubmit}
-        href="/(screens)/vote-events/VerifyFingerprint"
+        onNavigate={() =>
+          router.replace("/(screens)/vote-events/VerifyFingerprint")
+        }
       />
     </View>
   );

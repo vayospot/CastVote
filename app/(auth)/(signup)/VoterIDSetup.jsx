@@ -1,5 +1,6 @@
-import VoterIDInput from "@/components/VoterIDInput";
 import { View } from "react-native";
+import { router } from "expo-router";
+import VoterIDInput from "@/components/VoterIDInput";
 
 export default function VoterIDSetup() {
   const onSubmit = (data) => {
@@ -12,7 +13,12 @@ export default function VoterIDSetup() {
 
   return (
     <View className="flex-1 bg-default px-6 pt-5">
-      <VoterIDInput onSubmit={onSubmit} href="/(auth)/(signup)/AccountSetup" />
+      <VoterIDInput
+        onSubmit={onSubmit}
+        onNavigate={() => {
+          router.push("/(auth)/(signup)/AccountSetup");
+        }}
+      />
     </View>
   );
 }

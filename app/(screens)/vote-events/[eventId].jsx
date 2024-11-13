@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Header } from "@react-navigation/elements";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -13,12 +13,21 @@ import CustomButton from "@/components/CustomButton";
 import formatTimestamp from "@/utils/formatTimestamp";
 import Colors from "@/constants/Colors";
 import Toast from "react-native-toast-message";
+import useVoteStore from "@/contexts/useVoteStore";
 
 export default function VoteEvent() {
-  const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const selectedCandidate = useVoteStore((state) => state.selectedCandidate);
+  const setSelectedCandidate = useVoteStore(
+    (state) => state.setSelectedCandidate,
+  );
+  const setVoteEvent = useVoteStore((state) => state.setVoteEvent);
   const { eventId } = useLocalSearchParams();
   const event = VOTE_EVENTS.find((event) => event.id === eventId);
   const candidates = event.candidates.map((id) => CANDIDATES[id]);
+
+  useEffect(() => {
+    setVoteEvent(eventId);
+  }, []);
 
   const handleVotePress = () => {
     if (!selectedCandidate) {
@@ -27,7 +36,7 @@ export default function VoteEvent() {
         text1: "Please select a candidate",
       });
     } else {
-      router.push(`(screens)/vote-events/VerifyVoterID`);
+      router.push("(screens)/vote-events/VerifyVoterID");
     }
   };
 
@@ -41,7 +50,7 @@ export default function VoteEvent() {
             style={{ gap: 5 }}
           >
             <Ionicons name="people-outline" size={20} color={Colors.subtle} />
-            <Text className="text-neutral-500 font-boldFont">Total Votes</Text>
+            <Text className="font-boldFont text-neutral-500">Total Votes</Text>
           </View>
 
           <View style={{ gap: 8 }}>
@@ -82,7 +91,7 @@ export default function VoteEvent() {
                   <Text className="font-boldFont text-lg text-default">
                     {candidate?.name}
                   </Text>
-                  <Text className="font-regularFont text-neutral">
+                  <Text className="text-neutral font-regularFont">
                     {candidate?.party}
                   </Text>
                 </View>
@@ -95,7 +104,9 @@ export default function VoteEvent() {
                 underlayColor="transparent"
                 iconStyle={{ marginRight: 5, marginLeft: 5 }}
                 onPress={() =>
-                  router.push(`(screens)/vote-events/candidates/${candidate.id}`)
+                  router.push(
+                    `(screens)/vote-events/candidates/${candidate.id}`,
+                  )
                 }
                 activeOpacity={0.3}
               />

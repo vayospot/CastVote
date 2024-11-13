@@ -11,10 +11,12 @@ export default function VerifyFingerprint() {
         {
           text: "No",
           style: "cancel",
-          onPress: () =>
-            router.replace("/(screens)/vote-events/aFWdHRn39TAxjJZ9Hgb3MjkF"),
+          onPress: () => router.back(),
         },
-        { text: "Yes", onPress: () => router.push("/(tabs)/Home") },
+        {
+          text: "Yes",
+          onPress: () => router.replace("/(screens)/vote-events/VoteReceipt"),
+        },
       ],
       { cancelable: true },
     );

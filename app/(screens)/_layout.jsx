@@ -31,6 +31,10 @@ export default function ScreensLayout() {
       />
       <Stack.Screen name="vote-events/VerifyVoterID" />
       <Stack.Screen name="vote-events/VerifyFingerprint" />
+      <Stack.Screen
+        name="vote-events/VoteReceipt"
+        options={{ title: "Vote Receipt" }}
+      />
     </Stack>
   );
 }

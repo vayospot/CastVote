@@ -2,7 +2,7 @@ import { Stack } from "expo-router";
 import BackButton from "@/components/BackButton";
 import Colors from "@/constants/Colors";
 
-export default function RoutesLayout() {
+export default function ScreensLayout() {
   return (
     <Stack
       screenOptions={{

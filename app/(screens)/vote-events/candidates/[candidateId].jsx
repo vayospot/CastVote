@@ -29,7 +29,7 @@ export default function Candidate() {
         <CustomButton
           title="Vote"
           className="bg-primary"
-          onPress={() => router.push(`(routes)/vote-events/VerifyVoterID`)}
+          onPress={() => router.push(`(screens)/vote-events/VerifyVoterID`)}
         />
       </View>
 

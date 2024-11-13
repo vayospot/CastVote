@@ -17,7 +17,7 @@ export default VoteEventCard = ({
   voted = false,
 }) => {
   return (
-    <Link href={`/(routes)/vote-events/${eventId}`} asChild>
+    <Link href={`/(screens)/vote-events/${eventId}`} asChild>
       <TouchableOpacity activeOpacity={0.9} className="max-w-xs self-center">
         <ImageBackground
           source={imageSource}

@@ -1,14 +1,10 @@
 import { useEffect } from "react";
-import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import Toast, {
-  ErrorToast,
-  InfoToast,
-  SuccessToast,
-} from "react-native-toast-message";
-import toastConfig from "@/constants/toastConfig";
+import { useFonts } from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
+import * as SplashScreen from "expo-splash-screen";
+import Toast from "react-native-toast-message";
+import toastConfig from "@/constants/toastConfig";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -34,7 +30,7 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="(routes)" />
+        <Stack.Screen name="(screens)" />
       </Stack>
       <Toast config={toastConfig} />
     </>

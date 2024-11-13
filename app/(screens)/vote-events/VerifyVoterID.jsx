@@ -14,7 +14,7 @@ export default function VerifyVoterID() {
     <View className="flex-1 pt-5">
       <VoterIDInput
         onSubmit={onSubmit}
-        href="/(routes)/vote-events/VerifyFingerprint"
+        href="/(screens)/vote-events/VerifyFingerprint"
       />
     </View>
   );

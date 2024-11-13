@@ -27,7 +27,7 @@ export default function VoteEvent() {
         text1: "Please select a candidate",
       });
     } else {
-      router.push(`(routes)/vote-events/VerifyVoterID`);
+      router.push(`(screens)/vote-events/VerifyVoterID`);
     }
   };
 
@@ -95,7 +95,7 @@ export default function VoteEvent() {
                 underlayColor="transparent"
                 iconStyle={{ marginRight: 5, marginLeft: 5 }}
                 onPress={() =>
-                  router.push(`(routes)/vote-events/candidates/${candidate.id}`)
+                  router.push(`(screens)/vote-events/candidates/${candidate.id}`)
                 }
                 activeOpacity={0.3}
               />

@@ -12,21 +12,20 @@ export default function SignIn() {
   const {
     control,
     handleSubmit,
-    formState: { errors, dirtyFields, isValid },
+    formState: { errors, dirtyFields },
   } = useForm({
     defaultValues: {
       email: "",
       password: "",
-      terms_conditions: false,
     },
   });
 
-  const handleFormSubmit = () => {
-    if (!isValid) return;
+  const onSubmit = (data) => {
     try {
       setIsLoading(true);
-      handleSubmit(onSubmit)();
+      console.log(data);
       setTimeout(() => {
+        router.dismissAll();
         router.replace("/(tabs)/Home");
         setIsLoading(false);
       }, 1000);
@@ -35,8 +34,6 @@ export default function SignIn() {
       console.log(error);
     }
   };
-
-  const onSubmit = (data) => console.log(data);
 
   return (
     <View className="flex-1 bg-default px-6 pt-5">
@@ -61,7 +58,7 @@ export default function SignIn() {
             <Ionicons name="mail-outline" size={24} color={Colors.text} />
           )}
           validationError={errors.email}
-          onSubmit={handleFormSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         />
 
         <FormInput
@@ -81,14 +78,14 @@ export default function SignIn() {
             />
           )}
           validationError={errors.password}
-          onSubmit={handleFormSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         />
 
         <CustomButton
           title="Log In"
           className="mt-8 bg-primary"
           disabled={!dirtyFields.email || !dirtyFields.password}
-          onPress={handleFormSubmit}
+          onPress={handleSubmit(onSubmit)}
           loading={isLoading}
           loadingColor={Colors.background}
         />

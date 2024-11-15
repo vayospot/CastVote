@@ -1,10 +1,10 @@
+import { useState } from "react";
 import {
   Image as ExpoImage,
   ImageBackground as ExpoImageBackground,
 } from "expo-image";
 
-const DEFAULT_BLURHASH =
-  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+const DEFAULT_BLURHASH = "LBLEpKQ,9Fo#_NRORjD*00tR?aWV";
 
 export default function Image({
   source,
@@ -42,6 +42,7 @@ export function ImageBackground({
   aspectVideo = true,
   ...props
 }) {
+  const [loading, setLoading] = useState(true);
   if (preload && source) {
     ExpoImage.prefetch(source);
   }
@@ -52,9 +53,10 @@ export function ImageBackground({
       placeholder={placeholder}
       className={`w-full ${aspectVideo && "aspect-video"} ${className}`}
       transition={transition}
+      onLoad={() => setLoading(false)}
       {...props}
     >
-      {children}
+      {!loading && children}
     </ExpoImageBackground>
   );
 }

@@ -12,7 +12,7 @@ export default function VoterIDInput({ onSubmit, onNavigate }) {
     control,
     handleSubmit,
     setValue,
-    formState: { errors, dirtyFields, isValid },
+    formState: { errors, dirtyFields },
   } = useForm({
     defaultValues: {
       voterID: "",
@@ -30,11 +30,10 @@ export default function VoterIDInput({ onSubmit, onNavigate }) {
     });
   };
 
-  const handleFormSubmit = () => {
-    if (!isValid) return;
+  const submitForm = (data) => {
     try {
       setIsLoading(true);
-      handleSubmit(onSubmit)();
+      onSubmit(data);
       setTimeout(() => {
         onNavigate();
         setIsLoading(false);
@@ -76,14 +75,14 @@ export default function VoterIDInput({ onSubmit, onNavigate }) {
             },
           }}
           validationError={errors.voterID}
-          onSubmit={handleFormSubmit}
+          onSubmit={handleSubmit(submitForm)}
         />
 
         <CustomButton
           title="Verify"
           className="bg-primary"
           disabled={!dirtyFields.voterID}
-          onPress={handleFormSubmit}
+          onPress={handleSubmit(submitForm)}
           loading={isLoading}
           loadingColor={Colors.background}
         />

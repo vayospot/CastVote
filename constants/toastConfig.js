@@ -4,7 +4,7 @@ import {
   SuccessToast,
 } from "react-native-toast-message";
 
-export default toastConfig = {
+const toastConfig = {
   error: (props) => (
     <ErrorToast
       {...props}
@@ -51,3 +51,5 @@ export default toastConfig = {
     />
   ),
 };
+
+export default toastConfig;

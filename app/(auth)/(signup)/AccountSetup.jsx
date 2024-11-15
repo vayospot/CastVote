@@ -14,7 +14,7 @@ export default function AccountSetup() {
   const {
     control,
     handleSubmit,
-    formState: { errors, dirtyFields, isValid },
+    formState: { errors, dirtyFields },
   } = useForm({
     defaultValues: {
       name: "Chinonso Okeke",
@@ -26,11 +26,14 @@ export default function AccountSetup() {
     },
   });
 
-  const handleFormSubmit = () => {
-    if (!isValid) return;
+  const onSubmit = (data) => {
     try {
       setIsLoading(true);
-      handleSubmit(onSubmit)();
+      const cleanedData = {
+        ...data,
+        voterID: data.voterID.replaceAll("-", ""),
+      };
+      console.log(cleanedData);
       setTimeout(() => {
         router.push("/(auth)/(signup)/FingerprintSetup");
         setIsLoading(false);
@@ -39,14 +42,6 @@ export default function AccountSetup() {
       setIsLoading(false);
       console.log(error);
     }
-  };
-
-  const onSubmit = (data) => {
-    const cleanedData = {
-      ...data,
-      voterID: data.voterID.replaceAll("-", ""),
-    };
-    console.log(cleanedData);
   };
 
   const handleScroll = (event) => {
@@ -99,7 +94,7 @@ export default function AccountSetup() {
             <Ionicons name="person-outline" size={24} color={Colors.text} />
           )}
           validationError={errors.name}
-          onSubmit={handleFormSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           disabled={true}
         />
 
@@ -114,7 +109,7 @@ export default function AccountSetup() {
             <Ionicons name="calendar-outline" size={24} color={Colors.text} />
           )}
           validationError={errors.date_of_birth}
-          onSubmit={handleFormSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           disabled={true}
         />
 
@@ -135,7 +130,7 @@ export default function AccountSetup() {
             <Ionicons name="card-outline" size={24} color={Colors.text} />
           )}
           validationError={errors.voterID}
-          onSubmit={handleFormSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           disabled={true}
         />
 
@@ -155,7 +150,7 @@ export default function AccountSetup() {
             <Ionicons name="mail-outline" size={24} color={Colors.text} />
           )}
           validationError={errors.email}
-          onSubmit={handleFormSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         />
 
         <FormInput
@@ -175,7 +170,7 @@ export default function AccountSetup() {
             />
           )}
           validationError={errors.password}
-          onSubmit={handleFormSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         />
 
         <FormInput
@@ -193,7 +188,7 @@ export default function AccountSetup() {
           title="Next"
           className="bg-primary"
           disabled={!dirtyFields.email || !dirtyFields.password}
-          onPress={handleFormSubmit}
+          onPress={handleSubmit(onSubmit)}
           loading={isLoading}
           loadingColor={Colors.background}
         />

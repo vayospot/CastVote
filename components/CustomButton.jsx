@@ -35,7 +35,7 @@ export default function CustomButton({
 }) {
   return (
     <TouchableOpacity
-      className={`relative w-11/12 flex-row items-center justify-center self-center rounded-2xl bg-black p-3 shadow-md shadow-neutral-400/70 ${className} ${(disabled || loading) && "opacity-80"}`}
+      className={`relative w-11/12 flex-row items-center justify-center self-center rounded-2xl bg-black p-3 shadow-md shadow-neutral-400/70 ${className} ${(disabled || loading) && "opacity-60"}`}
       disabled={disabled || loading}
       onPress={disabled || loading ? null : onPress}
       activeOpacity={0.8}

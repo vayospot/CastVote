@@ -27,7 +27,7 @@ const { width: screenWidth } = Dimensions.get("window");
  *
  * @returns {JSX.Element} Swiper component with children and pagination.
  */
-export default Swiper = forwardRef(
+const Swiper = forwardRef(
   (
     {
       children,
@@ -141,3 +141,7 @@ export default Swiper = forwardRef(
     );
   },
 );
+
+Swiper.displayName = "Swiper";
+
+export default Swiper;

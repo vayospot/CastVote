@@ -6,21 +6,25 @@ import { ImageBackground } from "@/components/Image";
 import Colors from "@/constants/Colors";
 import abbreviateNumber from "@/utils/abbreviateNumber";
 import formatTimestamp from "@/utils/formatTimestamp";
+import useGlobalStore from "@/contexts/useGlobalStore";
 
-export default VoteEventCard = ({
+const VoteEventCard = ({
   id: eventId,
   title,
-  subtitle,
+  location,
   timeLeft,
   voteCount,
-  imageSource,
-  voted = false,
+  imageUrl,
 }) => {
+  const hasVoted = useGlobalStore((state) => state.user.votedEvents).some(
+    (e) => e.eventId === eventId,
+  );
+
   return (
     <Link href={`/(screens)/vote-events/${eventId}`} asChild>
       <TouchableOpacity activeOpacity={0.9} className="max-w-xs self-center">
         <ImageBackground
-          source={imageSource}
+          source={imageUrl}
           className="relative justify-between overflow-hidden rounded-xl"
           transition={1000}
         >
@@ -35,7 +39,7 @@ export default VoteEventCard = ({
             <Text className="font-boldFont text-lg text-background">
               {title}
             </Text>
-            <Text className="font-boldFont text-background">{subtitle}</Text>
+            <Text className="font-boldFont text-background">{location}</Text>
           </View>
 
           <View
@@ -77,12 +81,12 @@ export default VoteEventCard = ({
             />
 
             <View
-              className={`min-w-[65] rounded-lg bg-background ${voted && "border border-background bg-transparent"}`}
+              className={`min-w-[65] rounded-lg bg-background ${hasVoted && "border border-background bg-transparent"}`}
             >
               <Text
-                className={`px-4 py-2 text-center font-boldFont text-default ${voted && "text-background"}`}
+                className={`px-4 py-2 text-center font-boldFont text-default ${hasVoted && "text-background"}`}
               >
-                {voted ? "Voted" : "Vote"}
+                {hasVoted ? "Voted" : "Vote"}
               </Text>
             </View>
           </View>
@@ -91,3 +95,5 @@ export default VoteEventCard = ({
     </Link>
   );
 };
+
+export default VoteEventCard;

@@ -4,9 +4,11 @@ import SearchBar from "@/components/SearchBar";
 import VoteEventCard from "@/components/VoteEventCard";
 import FilterCategories from "@/components/FilterCategories";
 import Colors from "@/constants/Colors";
-import { VOTE_EVENTS } from "@/services/mockData";
+import useGlobalStore from "@/contexts/useGlobalStore";
 
 export default function Home() {
+  const EVENTS = useGlobalStore((state) => state.events);
+
   return (
     <View className="flex-1" style={{ gap: 20 }}>
       <View style={{ gap: 15 }}>
@@ -32,7 +34,7 @@ export default function Home() {
       </View>
 
       <FlatList
-        data={VOTE_EVENTS}
+        data={EVENTS}
         renderItem={({ item }) => <VoteEventCard {...item} />}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}

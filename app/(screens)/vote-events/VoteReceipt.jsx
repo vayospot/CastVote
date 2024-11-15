@@ -1,18 +1,15 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import useVoteStore from "@/contexts/useVoteStore";
-import { CANDIDATES, VOTE_EVENTS } from "@/services/mockData";
 import ProfileImage from "@/components/ProfileImage";
 import { Ionicons } from "@expo/vector-icons";
-import {  router } from "expo-router";
+import { router } from "expo-router";
 import Colors from "@/constants/Colors";
 import CustomButton from "@/components/CustomButton";
 import Toast from "react-native-toast-message";
+import useGlobalStore from "@/contexts/useGlobalStore";
 
 export default function VoteReceipt() {
-  const voteEventId = useVoteStore((state) => state.voteEvent);
-  const candidateId = useVoteStore((state) => state.selectedCandidate);
-  const event = VOTE_EVENTS.find((event) => event.id === voteEventId);
-  const candidate = CANDIDATES[candidateId];
+  const event = useGlobalStore((state) => state.selectedEvent);
+  const candidate = useGlobalStore((state) => state.selectedCandidate);
 
   return (
     <View className="flex-1 items-center pt-5" style={{ gap: 30 }}>
@@ -20,22 +17,22 @@ export default function VoteReceipt() {
         className="flex-row items-center justify-center px-6"
         style={{ gap: 30 }}
       >
-        <ProfileImage source={candidate.imageUrl} size={80} />
+        <ProfileImage source={candidate?.imageUrl} size={80} />
         <View>
           <Text className="font-boldFont text-2xl text-default">
-            {candidate.name}
+            {candidate?.name}
           </Text>
           <Text className="text-center font-regularFont text-subtle">
-            {candidate.party}
+            {candidate?.party}
           </Text>
         </View>
       </View>
 
       <Text className="text-center font-regularFont text-base">
         Thank you for participating in the{" "}
-        <Text className="font-boldFont">{event.title}</Text>. Your vote
-        has been successfully cast for{" "}
-        <Text className="font-boldFont">{candidate.name}</Text>.
+        <Text className="font-boldFont">{event?.title}</Text>. Your vote has
+        been successfully cast for{" "}
+        <Text className="font-boldFont">{candidate?.name}</Text>.
       </Text>
 
       <Ionicons

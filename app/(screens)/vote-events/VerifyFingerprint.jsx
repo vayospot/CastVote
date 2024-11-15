@@ -1,8 +1,13 @@
 import { View, Alert } from "react-native";
 import { router } from "expo-router";
 import Fingerprint from "@/components/Fingerprint";
+import useGlobalStore from "@/contexts/useGlobalStore";
 
 export default function VerifyFingerprint() {
+  const event = useGlobalStore((state) => state.selectedEvent);
+  const candidate = useGlobalStore((state) => state.selectedCandidate);
+  const setVotedEvents = useGlobalStore((state) => state.setVotedEvents);
+
   const onSubmit = () => {
     Alert.alert(
       "Cast Vote",
@@ -15,11 +20,20 @@ export default function VerifyFingerprint() {
         },
         {
           text: "Yes",
-          onPress: () => router.replace("/(screens)/vote-events/VoteReceipt"),
+          onPress: handleCastVote,
         },
       ],
       { cancelable: true },
     );
+  };
+
+  const handleCastVote = () => {
+    setVotedEvents({
+      eventId: event.id,
+      candidateId: candidate.uid,
+      timestamp: Date.now(),
+    });
+    router.replace("/(screens)/vote-events/VoteReceipt");
   };
 
   return (

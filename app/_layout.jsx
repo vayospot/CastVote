@@ -1,14 +1,16 @@
 import { useEffect } from "react";
-import { Stack } from "expo-router";
+import { router, SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
-import * as SplashScreen from "expo-splash-screen";
 import Toast from "react-native-toast-message";
 import toastConfig from "@/constants/toastConfig";
+import useGlobalStore from "@/contexts/useGlobalStore";
+import Colors from "@/constants/Colors";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const getEvents = useGlobalStore((state) => state.getEvents);
   const [fontLoaded] = useFonts({
     PTSansBold: require("../assets/fonts/PTSans-Bold.ttf"),
     PTSansRegular: require("../assets/fonts/PTSans-Regular.ttf"),
@@ -16,10 +18,16 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if (fontLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontLoaded]);
+    const initializeApp = async () => {
+      if (fontLoaded) {
+        await getEvents.initialFetch();
+        router.replace("/(tabs)/Home");
+        SplashScreen.hideAsync();
+      }
+    };
+
+    initializeApp();
+  }, [fontLoaded, getEvents]);
 
   if (!fontLoaded) {
     return null;
@@ -27,7 +35,12 @@ export default function RootLayout() {
 
   return (
     <>
-      <Stack screenOptions={{ headerShown: false }}>
+      <Stack
+        screenOptions={{
+          contentStyle: { backgroundColor: Colors.background },
+          headerShown: false,
+        }}
+      >
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="(screens)" />

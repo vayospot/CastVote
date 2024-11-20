@@ -34,7 +34,7 @@ export default function CandidateList({
               <Text className="font-boldFont text-lg text-default">
                 {candidate?.name}
               </Text>
-              <Text className="text-neutral font-regularFont">
+              <Text className="text-subtle font-regularFont">
                 {candidate?.party}
               </Text>
             </View>

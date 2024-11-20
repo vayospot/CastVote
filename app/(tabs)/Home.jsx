@@ -13,7 +13,7 @@ export default function Home() {
     <View className="flex-1" style={{ gap: 20 }}>
       <View style={{ gap: 15 }}>
         <View className="flex-row items-center justify-between">
-          <Text className="font-boldFont text-3xl text-default">
+          <Text className="font-boldFont text-2xl text-default">
             Voting Events
           </Text>
           <Ionicons name="calendar-outline" size={24} color={Colors.text} />

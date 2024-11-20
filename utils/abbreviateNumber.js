@@ -1,23 +1,44 @@
 /**
- * Abbreviates a number to the nearest thousand, million or billion.
- * Examples:
- *   1000 -> 1k
- *   10000 -> 10k
- *   1000000 -> 1m
- *   1000000000 -> 1b
- * @param {number} num - The number to abbreviate
- * @returns {string} The abbreviated number
+ * Abbreviates a number to K (thousands), M (millions), or B (billions)
+ * @param {number} number - The number to abbreviate
+ * @param {number} [decimals=1] - Number of decimal places (default: 1)
+ * @returns {string} Abbreviated number (e.g., "1.2k", "1.5m", "2.3b")
+ * @throws {TypeError} If input is not a finite number
  */
-export default function abbreviateNumber(num) {
-  if (num >= 1_000_000_000) {
-    return (num / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + "b"; // 1 billion
-  }
-  if (num >= 1_000_000) {
-    return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "m"; // 1 million
-  }
-  if (num >= 1_000) {
-    return (num / 1_000).toFixed(1).replace(/\.0$/, "") + "k"; // 1 thousand
+export default function abbreviateNumber(number, decimals = 1) {
+  // Input validation
+  if (!Number.isFinite(number)) {
+    throw new TypeError("Input must be a finite number");
   }
 
-  return num.toString(); // Less than 1 thousand
+  // Handle negative numbers
+  const isNegative = number < 0;
+  const absNumber = Math.abs(number);
+
+  // Define thresholds and their suffixes
+  const abbreviations = [
+    { threshold: 1e9, suffix: "b" }, // billions
+    { threshold: 1e6, suffix: "m" }, // millions
+    { threshold: 1e3, suffix: "k" }, // thousands
+  ];
+
+  // Find the appropriate abbreviation
+  const abbreviation = abbreviations.find(
+    ({ threshold }) => absNumber >= threshold,
+  );
+
+  // If no abbreviation is needed, return original number
+  if (!abbreviation) {
+    return isNegative ? `-${absNumber}` : absNumber.toString();
+  }
+
+  // Calculate abbreviated value
+  const value = absNumber / abbreviation.threshold;
+  const factor = Math.pow(10, decimals);
+  const truncated = Math.floor(value * factor) / factor;
+
+  // Format the number
+  const formatted = truncated.toFixed(decimals).replace(/\.0+$/, "");
+
+  return `${isNegative ? "-" : ""}${formatted}${abbreviation.suffix}`;
 }

@@ -4,11 +4,13 @@ This is a secure voting app to simplify elections. CastVote uses fingerprint aut
 
 ## Demo
 
-Coming soon!
+_Coming soon!_
 
 ## Design
 
-Coming Soon!
+![CastVote_UI_Design](https://github.com/user-attachments/assets/c9a17a19-6e96-4713-a887-6017abe62527)
+
+_Shoutout to the designers whose designs inspired CastVote!_
 
 ## Features
 
@@ -57,5 +59,5 @@ Big love to:
 Feel free to reach out:
 
 - 📧 Email: [vayospot@gmail.com](mailto:email@example.com)
-- 🐦 Twitter: [@vayospot](x.com/vayospot)
-- 🤝 LinkedIn: [vayospot](linkedin.com/in/vayospot)
+- 🐦 Twitter: [@vayospot](https://x.com/vayospot)
+- 💼 LinkedIn: [vayospot](https://linkedin.com/in/vayospot)

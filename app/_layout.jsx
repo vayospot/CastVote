@@ -5,14 +5,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Toast from "react-native-toast-message";
 import toastConfig from "@/constants/toastConfig";
-import useGlobalStore from "@/contexts/useGlobalStore";
 import Colors from "@/constants/Colors";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const getEvents = useGlobalStore((state) => state.getEvents);
   const [fontLoaded] = useFonts({
     PTSansBold: require("../assets/fonts/PTSans-Bold.ttf"),
     PTSansRegular: require("../assets/fonts/PTSans-Regular.ttf"),
@@ -22,14 +20,13 @@ export default function RootLayout() {
   useEffect(() => {
     const initializeApp = async () => {
       if (fontLoaded) {
-        await getEvents.initialFetch();
-        router.replace("/(tabs)/Home");
+        router.replace("/(auth)/");
         SplashScreen.hideAsync();
       }
     };
 
     initializeApp();
-  }, [fontLoaded, getEvents]);
+  }, [fontLoaded]);
 
   if (!fontLoaded) {
     return null;

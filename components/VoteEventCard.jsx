@@ -81,14 +81,10 @@ const VoteEventCard = ({
             </View>
           </View>
 
-          <Ionicons.Button
+          <Ionicons
             name="stats-chart-outline"
             size={24}
-            iconStyle={{ marginRight: 0 }}
             color={Colors.background}
-            backgroundColor="transparent"
-            underlayColor="transparent"
-            onPress={() => console.log("Pressed")}
           />
 
           <View

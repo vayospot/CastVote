@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "@/constants/Colors";
+import Toast from "react-native-toast-message";
 
 const MENU_ITEMS = [
   // individual routes to be added
@@ -56,19 +57,24 @@ export default function Profile() {
 
       <View className="rounded-xl bg-white px-4 py-7" style={{ gap: 30 }}>
         {MENU_ITEMS.map((item, index) => (
-          <Link key={index} href={item.route} asChild>
-            <TouchableOpacity
-              className="flex-row items-center"
-              activeOpacity={0.5}
-              style={{ gap: 20 }}
-            >
-              <Ionicons name={item.icon} size={24} color={Colors.text} />
-              <Text className="flex-1 font-boldFont text-lg text-default">
-                {item.title}
-              </Text>
-              <Ionicons name="chevron-forward" size={24} color={Colors.text} />
-            </TouchableOpacity>
-          </Link>
+          <TouchableOpacity
+            key={index}
+            className="flex-row items-center"
+            activeOpacity={0.5}
+            style={{ gap: 20 }}
+            onPress={() =>
+              Toast.show({
+                type: "info",
+                text1: `${item.title} is under development`,
+              })
+            }
+          >
+            <Ionicons name={item.icon} size={24} color={Colors.text} />
+            <Text className="flex-1 font-boldFont text-lg text-default">
+              {item.title}
+            </Text>
+            <Ionicons name="chevron-forward" size={24} color={Colors.text} />
+          </TouchableOpacity>
         ))}
       </View>
     </View>

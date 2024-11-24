@@ -6,7 +6,6 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as LocalAuthentication from "expo-local-authentication";
 import Toast from "react-native-toast-message";
@@ -79,20 +78,17 @@ export default function Fingerprint({
           type: "success",
           text1: "Fingerprint verified successfully.",
         });
-        setTimeout(() => {
-          onsubmit();
-          setIsRegistering(false);
-        }, 1000);
+        await onsubmit();
       } else {
         Toast.show({
           type: "error",
           text1: "An error occurred. Try again.",
         });
-        setIsRegistering(false);
       }
     } catch (error) {
-      setIsRegistering(false);
       console.log(error);
+    } finally {
+      setIsRegistering(false);
     }
   };
 
@@ -102,7 +98,19 @@ export default function Fingerprint({
       "You won't be able to use fingerprint verification for voting.",
       [
         { text: "Cancel", style: "cancel" },
-        { text: "Proceed", onPress: () => router.replace("/(tabs)/Home") },
+        {
+          text: "Proceed",
+          onPress: async () => {
+            setIsLoading(true);
+            try {
+              await onsubmit();
+            } catch (error) {
+              console.log(error);
+            } finally {
+              setIsLoading(false);
+            }
+          },
+        },
       ],
       { cancelable: true },
     );

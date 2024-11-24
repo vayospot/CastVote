@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Controller } from "react-hook-form";
 import { Ionicons } from "@expo/vector-icons";
+import { Picker } from "@react-native-picker/picker";
 
 export default function FormInput({
   control,
@@ -22,6 +23,7 @@ export default function FormInput({
   inputClassName,
   inputBoxClassName,
   containerClassName,
+  handleChangeText,
   IconLeft,
   validationError,
   onSubmit,
@@ -71,7 +73,13 @@ export default function FormInput({
                 <TextInput
                   className={`flex-1 py-1 font-regularFont text-lg text-default ${inputClassName}`}
                   value={value}
-                  onChangeText={onChange}
+                  onChangeText={(text) => {
+                    const value = handleChangeText
+                      ? handleChangeText(text)
+                      : text;
+
+                    onChange(value);
+                  }}
                   onBlur={onBlur}
                   onSubmitEditing={handleFormSubmit}
                   secureTextEntry={secureTextEntry && isSecureHidden}
@@ -135,5 +143,87 @@ function Checkbox({
       </View>
       <Text className="font-boldFont text-default">{title}</Text>
     </Pressable>
+  );
+}
+
+export function PickerInput({
+  control,
+  name,
+  label,
+  rules,
+  labelClassName,
+  containerClassName,
+  inputBoxClassName,
+  IconLeft,
+  disabled = false,
+  pickerItems = [],
+  pickerItemsFont,
+  pickerItemsColor,
+  placeholder,
+  validationError,
+  ...props
+}) {
+  const [pickerFocused, setPickerFocused] = useState(false);
+
+  return (
+    <View className={containerClassName} style={{ gap: 6 }}>
+      {label && (
+        <Text className={`font-regularFont text-default/75 ${labelClassName}`}>
+          {label}
+        </Text>
+      )}
+
+      <Controller
+        control={control}
+        name={name}
+        rules={rules}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <View
+            className={`flex-row items-center border-b border-default py-2 ${inputBoxClassName} ${disabled && "opacity-40"}`}
+            style={{ gap: 15 }}
+          >
+            {IconLeft && <IconLeft />}
+
+            <Picker
+              selectedValue={value}
+              onValueChange={onChange}
+              enabled={!disabled}
+              onBlur={() => {
+                setPickerFocused(false);
+                onBlur();
+              }}
+              onFocus={() => setPickerFocused(true)}
+              style={{
+                flex: 1,
+                margin: -16, // Remove default picker padding: https://stackoverflow.com/a/73412764/18845418
+              }}
+              {...props}
+            >
+              <Picker.Item
+                value={null}
+                label={placeholder}
+                enabled={!pickerFocused}
+                color="#737373"
+              />
+              {pickerItems.map((item, index) => (
+                <Picker.Item
+                  key={`${item.value}-${index}`}
+                  label={item.label}
+                  value={item.value}
+                  fontFamily={pickerItemsFont}
+                  style={{ fontSize: 16, color: pickerItemsColor || "#000" }}
+                />
+              ))}
+            </Picker>
+          </View>
+        )}
+      />
+
+      <Text
+        className={`text-sm text-red-600 opacity-0 ${validationError && "opacity-100"}`}
+      >
+        {validationError?.message}
+      </Text>
+    </View>
   );
 }

@@ -36,6 +36,7 @@ export default function ScreensLayout() {
         options={{ title: "Vote Receipt" }}
       />
       <Stack.Screen name="StatsBottomSheet" />
+      <Stack.Screen name="EditProfile" />
     </Stack>
   );
 }

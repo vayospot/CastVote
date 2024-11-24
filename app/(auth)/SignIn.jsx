@@ -6,8 +6,10 @@ import Colors from "@/constants/Colors";
 import FormInput from "@/components/FormInput";
 import CustomButton from "@/components/CustomButton";
 import { useState } from "react";
+import useGlobalStore from "@/contexts/useGlobalStore";
 
 export default function SignIn() {
+  const getEvents = useGlobalStore((state) => state.getEvents);
   const [isLoading, setIsLoading] = useState(false);
   const {
     control,
@@ -20,18 +22,17 @@ export default function SignIn() {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     try {
       setIsLoading(true);
       console.log(data);
-      setTimeout(() => {
-        router.dismissAll();
-        router.replace("/(tabs)/Home");
-        setIsLoading(false);
-      }, 1000);
+      await getEvents.initialFetch();
+      router.dismissAll();
+      router.replace("/(tabs)/Home");
     } catch (error) {
-      setIsLoading(false);
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 

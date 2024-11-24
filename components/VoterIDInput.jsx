@@ -11,7 +11,6 @@ export default function VoterIDInput({ onSubmit, onNavigate }) {
   const {
     control,
     handleSubmit,
-    setValue,
     formState: { errors, dirtyFields },
   } = useForm({
     defaultValues: {
@@ -23,11 +22,7 @@ export default function VoterIDInput({ onSubmit, onNavigate }) {
     const numeric = value.replace(/\D/g, "");
     // Format with dashes on every 4 characters
     const formatted = numeric.match(/.{1,4}/g)?.join("-") || "";
-
-    setValue("voterID", formatted.slice(0, 24), {
-      shouldValidate: true,
-      shouldDirty: true,
-    });
+    return formatted.slice(0, 24);
   };
 
   const submitForm = (data) => {
@@ -66,7 +61,7 @@ export default function VoterIDInput({ onSubmit, onNavigate }) {
           placeholder="Voter ID"
           inputMode="numeric"
           maxLength={24} // 20 digits + 4 dashes
-          onChangeText={formatVoterID}
+          handleChangeText={formatVoterID}
           rules={{
             required: "Voter ID is required",
             pattern: {

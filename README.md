@@ -4,7 +4,7 @@ This is a secure voting app to simplify elections. CastVote uses fingerprint aut
 
 ## Demo
 
-_Coming soon!_
+https://github.com/user-attachments/assets/4dff529a-750f-4fc2-bf2b-39d2ca66f9e6
 
 ## Design
 
